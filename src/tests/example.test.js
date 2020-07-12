@@ -17,18 +17,9 @@ describe('Mocha steps demo', () => {
     });
 
     step("should load google homepage", async () => {
-        await page.goto("https://www.google.com");
+        await page.goto("http://zero.webappsecurity.com/");
+        await page.waitAndClick("#onlineBankingMenu");
+        await page.waitFor(5000);
         });
 
-    step("step 2 should fail", async () => {
-        await page.waitForSelector("#Fail");
-    });
-
-    step("step 3", async () => {
-        console.log("From step 3");
-    });
-
-    step("step 4", async () => {
-        console.log("From step 4");
-    });
-})
+});
