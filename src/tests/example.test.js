@@ -1,4 +1,5 @@
 import { step } from "mocha-steps";
+import { expect } from "chai";
 import Page from "../builder";
 
 describe('Mocha steps demo', () => {
@@ -6,9 +7,7 @@ describe('Mocha steps demo', () => {
     // let mobile;
 
     before(async () => {
-        // browser = await puppeteer.launch({ headless: true });
         page = await Page.build("Desktop");
-        // mobile = await Page.build("Mobile");
     });
 
     after(async () => {
@@ -18,8 +17,23 @@ describe('Mocha steps demo', () => {
 
     step("should load google homepage", async () => {
         await page.goto("http://zero.webappsecurity.com/");
-        await page.waitAndClick("#onlineBankingMenu");
-        await page.waitFor(5000);
+        const signInButton = await page.isElementVisible("#signin_button");
+        expect(signInButton).to.be.true
         });
+    
+    step ("should display login form", async () => {
+        await page.waitAndClick("#signin_button");
+        const loginForm = await page.isElementVisible("#login_form");
+        expect(loginForm).to.be.true
+        const signInButton = await page.isElementVisible("#signin_button");
+        expect(signInButton).to.be.false
+    });
 
+    step ("should login to application", async () => {
+        await page.waitAndType("#user_login", "username");
+        await page.waitAndType("#user_password", "password");
+        await page.waitAndClick(".btn-primary");
+        const navbar = await page.isElementVisible(".nav-tabs");
+        expect(navbar).to.be.true;
+    });
 });

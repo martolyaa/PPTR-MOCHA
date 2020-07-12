@@ -70,6 +70,52 @@ var Builder = function () {
             await this.page.waitForSelector(selector);
             await this.page.type(selector, text);
         }
+    }, {
+        key: "getText",
+        value: async function getText(selector) {
+            await this.page.waitForSelector(selector);
+            var text = await this.page.$eval(selector, function (e) {
+                return e.innetHTML;
+            });
+            return text;
+        }
+    }, {
+        key: "getCount",
+        value: async function getCount(selector) {
+            await this.page.waitForSelector(selector);
+            var count = await this.page.$$eval(selector, function (items) {
+                return items.length;
+            });
+            return count;
+        }
+    }, {
+        key: "waitForXPathAndClick",
+        value: async function waitForXPathAndClick(XPath) {
+            await this.page.waitForXPath(XPath);
+            var elements = await this.page.$x(xpath);
+            if (elements.length > 1) {
+                console.warn("waitForXPathAndClick returned more than one result");
+            }
+            await elements[0].click();
+        }
+    }, {
+        key: "isElementVisible",
+        value: async function isElementVisible(selector) {
+            var visible = true;
+            await this.page.waitForSelector(selector, { visible: true, timeout: 3000 }).catch(function () {
+                visible = false;
+            });
+            return visible;
+        }
+    }, {
+        key: "isXPathVisible",
+        value: async function isXPathVisible(selector) {
+            var visible = true;
+            await this.page.WaitForXPath(selector, { visible: true, timeout: 3000 }).catch(function () {
+                visible = false;
+            });
+            return visible;
+        }
     }]);
 
     return Builder;
