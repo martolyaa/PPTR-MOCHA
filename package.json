@@ -1,0 +1,28 @@
+{
+  "name": "pptr-mocha",
+  "version": "1.0.0",
+  "description": "PPTR-MOCHA course",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ./node_modules/mocha/bin/mocha --timeout=30000 ./build/test/**.js",
+    "clean": "rm -rf build",
+    "build": "babel" --preset es2015 -d /build /src",
+  },
+  "keywords": [
+    "Mocha",
+    "puppeeteer",
+    "framework"
+  ],
+  "author": "Olga Konovalova",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1",
+    "puppeteer": "^5.0.0",
+    "steps": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
