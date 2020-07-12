@@ -4,9 +4,9 @@
   "description": "PPTR-MOCHA course",
   "main": "index.js",
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/mocha --timeout=30000 ./build/test/**.js",
-    "clean": "rm -rf build",
-    "build": "babel" --preset es2015 -d /build /src",
+    "test": "node ./node_modules/mocha/bin/mocha --timeout=30000 ./build/tests/**.js",
+    "clean": "rmdir / s / q build",
+    "build": "babel --preset es2015 -d build/ src/"
   },
   "keywords": [
     "Mocha",
